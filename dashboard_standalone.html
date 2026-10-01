@@ -115,7 +115,22 @@
             font-size: 14px;
             font-style: italic;
         }
-    </style>
+    
+        .task-item.delayed {
+            border-left: 2px solid #E8A838;
+        }
+        .delay-badge {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(232, 168, 56, 0.15);
+            color: #E8A838;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        </style>
 </head>
 <body>
 
@@ -139,7 +154,7 @@
     </div>
 </div>
 
-<script>
+<script>/* DATA_START */
 window.dashboardData = [
   {
     "date": "2026-09-10",
@@ -148,23 +163,33 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "BTP: Make the previous model experiment ready",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Check out amd hackathon",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Fill interiit tech meet form",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "IBM Hackathon, check and apply",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Applied Elasticity: Class Test Syllabus",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -175,11 +200,15 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Submit in class",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "make Professor list",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -190,11 +219,15 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "VIB PP2 complete it",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "RL ",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -205,23 +238,33 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Complete Nptel lectures on AE",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Complete the yt playlist to notes agent",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Dig a little but about Notion and upgrade it",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "VIB pp3 start",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Follow up mail",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -232,35 +275,51 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Check Nanson\u2019s formula derivation",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Fill EIMS form",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "AE: Check how to find inverse of a matrix quickly",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "AE: Read Lec Notes",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "AE: Complete NPTEL",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "AE: Solve questions from book",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "IH: Do another country",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Send Mayank Resume",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -271,23 +330,33 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "VIB: Notebook question answers",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "VIB: Practice Problem (3)",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "VIB: Practice Problem (2)",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "VIB: Practice Problem (1)",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "VIB: Formula sheet",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -298,7 +367,9 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Ask manasa for rotating unbalance notes",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -309,11 +380,15 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "BTP: Do experiments and get pictures for ppt",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "BTP: Test old prototypes + log results",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -324,39 +399,57 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "BTP:  Do simulations to explain your btp",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "BTP: Properly organise the research papers based on what information they are conveying\u2026 maybe in notion or smtng",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "BTP:  check the research papers and see if there is research paper which said what distance is most optimal",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "BTP:",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Start working to apply on perceptive analytics",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "BTP: Make BTP Presentation and report",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Fill EIMS form ",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Start working of ROS mini project",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Watch something on how to build Linkedin",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -367,7 +460,9 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Apply for Perceptive Analytics \u2014 b4 17th sept",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -378,35 +473,51 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Visit sir",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Make report",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Make a script for ppt",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Do the 2d comsol simulation ",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Make changes in ppt.",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Read e yantra tasks",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Start and finish a considerable amount of uav",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Mail professors",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -417,11 +528,15 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "E Yantra: Complete task 1B",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Create agent to automate prof search",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -432,11 +547,15 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "Do RL",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Write VIB Lab report",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -447,15 +566,21 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "DSA\u2026 1 question",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Cold mail 5 profs everyday ",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "MTP: Be ready with a very interesting research idea ",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   },
@@ -466,103 +591,152 @@ window.dashboardData = [
     "tasks": [
       {
         "title": "delayed_1 Send Mayank Resume",
-        "status": false
+        "status": false,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Apply for Perceptive Analytics \u2014 b4 17th sept",
-        "status": false
+        "status": false,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Start working to apply on perceptive analytics",
-        "status": false
+        "status": false,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Do RL",
-        "status": false
+        "status": false,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 BTP: Make BTP Presentation and report",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 BTP:",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 BTP:  check the research papers and see if there is research paper which said what distance is most optimal",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 BTP: Properly organise the research papers based on what information they are conveying\u2026 maybe in notion or smtng",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 BTP:  Do simulations to explain your btp",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Mail professors",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Start and finish a considerable amount of uav",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Read e yantra tasks",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Make changes in ppt.",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Do the 2d comsol simulation",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Make a script for ppt",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Make report",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "delayed_1 Visit sir",
-        "status": true
+        "status": true,
+        "delayed": true,
+        "delay_count": 1
       },
       {
         "title": "Meet",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Meet",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Cold mail 5 profs everyday ",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "DSA\u2026 1 question",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Personal: Build Nexus a personal assistant (initially a meet notes taking appication)",
-        "status": false
+        "status": false,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "MTP: Figure out a way to get the transcript of whole meet",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       },
       {
         "title": "Meeting agenda\u2026 prepare for the meet",
-        "status": true
+        "status": true,
+        "delayed": false,
+        "delay_count": 0
       }
     ]
   }
 ];
+/* DATA_END */
 </script>
 <script>
     if (typeof window.dashboardData === 'undefined') {
@@ -671,10 +845,12 @@ window.dashboardData = [
             
             dayData.tasks.forEach(t => {
                 const item = document.createElement('div');
-                item.className = 'task-item' + (t.status ? ' completed' : '');
+                const isDelayed = t.delayed;
+                item.className = 'task-item' + (t.status ? ' completed' : '') + (isDelayed ? ' delayed' : '');
+                const badge = isDelayed ? `<span class="delay-badge">⏰ delayed_${t.delay_count}</span>` : '';
                 item.innerHTML = `
                     <div class="checkbox"></div>
-                    <div>${t.title}</div>
+                    <div>${t.title}${badge}</div>
                 `;
                 list.appendChild(item);
             });
