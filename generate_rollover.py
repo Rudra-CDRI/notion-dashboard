@@ -37,7 +37,7 @@ for page in tasks:
     if not title_prop:
         continue
         
-    title_str = title_prop[0].get('plain_text', '').strip()
+    title_str = ''.join([t.get('plain_text', '') for t in title_prop]).strip()
     
     # Extract delay count and base name
     match = re.match(r"^delayed_(\d+)\s+(.*)$", title_str, re.IGNORECASE)
