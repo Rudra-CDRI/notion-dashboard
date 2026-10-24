@@ -540,7 +540,7 @@ else:
 with open(html_path, 'w', encoding='utf-8') as f:
     f.write(new_content)
 
-subprocess.run("git add index.html", cwd=repo_dir, shell=True)
+subprocess.run("git add -A", cwd=repo_dir, shell=True)
 result = subprocess.run('git commit -m "Automated data sync & rollover"', cwd=repo_dir, shell=True, capture_output=True, text=True)
 if "nothing to commit" in (result.stdout + result.stderr):
     print("  No changes to push.")
