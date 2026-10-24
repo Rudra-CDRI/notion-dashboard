@@ -70,7 +70,9 @@ def normalize(t):
     if not t:
         return ""
     t = t.replace('\xa0', ' ').replace('…', '...').replace('–', '-').replace('—', '-')
-    t = re.sub(r'cold mail \d+ profs everyday', 'cold mail profs everyday', t, flags=re.IGNORECASE)
+    t = re.sub(r'cold mail (?:a|\d+)?\s*profs? everyday', 'cold mail profs everyday', t, flags=re.IGNORECASE)
+    t = re.sub(r'internship outreach:\s*daily outreach sprint.*', 'daily: scout & update centralized internship application portals across all countries', t, flags=re.IGNORECASE)
+    t = re.sub(r'rl:?\s*2hrs\s*(?:every\s*)?weekend\s*(\d+)', r'ai/ml/dl/rl: 2hrs every weekend \1', t, flags=re.IGNORECASE)
     t = re.sub(r'\bpack\b', 'pac', t, flags=re.IGNORECASE)
     t = re.sub(r'\bdatabas\b', 'database', t, flags=re.IGNORECASE)
     t = re.sub(r'\bmsake\b', 'make', t, flags=re.IGNORECASE)
