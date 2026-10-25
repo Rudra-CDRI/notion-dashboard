@@ -184,7 +184,7 @@
         <div class="card-header">
             <span class="card-title">Performance Trend</span>
             <div class="range-selector">
-                <button type="button" class="range-btn active" data-range="7">Last 7 Days</button>
+                <button type="button" class="range-btn active" data-range="15">Last 15 Days</button>
                 <button type="button" class="range-btn" data-range="30">Last 30 Days</button>
                 <button type="button" class="range-btn" data-range="all">So Far</button>
             </div>
@@ -3965,11 +3965,11 @@ window.dashboardData = [
     } else {
         const fullData = window.dashboardData;
         let currentData = [];
-        let currentRange = '7'; // default to last 7 days
+        let currentRange = '15'; // default to last 15 days
 
         function getFilteredData(range) {
-            if (range === '7') {
-                return fullData.slice(-7);
+            if (range === '15') {
+                return fullData.slice(-15);
             } else if (range === '30') {
                 return fullData.slice(-30);
             } else {
