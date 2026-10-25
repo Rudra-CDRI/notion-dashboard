@@ -509,9 +509,8 @@ for page in tasks:
 
 sorted_days = sorted(dashboard_data.values(), key=lambda x: x["date"], reverse=True)
 valid_days = [d for d in sorted_days if d["planned"] > 0 and d["date"] <= today]
-last_15 = valid_days[:15]
-last_15.reverse()
-print(f"  Built data for {len(last_15)} days.")
+valid_days.reverse()
+print(f"  Built data for {len(valid_days)} days.")
 
 # ---------------------------------------------------------------
 # PART 4: INJECT DATA INTO HTML & PUSH TO GITHUB
@@ -524,7 +523,7 @@ html_path = os.path.join(repo_dir, "index.html")
 with open(html_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
-new_js = f"window.dashboardData = {json.dumps(last_15, indent=2)};"
+new_js = f"window.dashboardData = {json.dumps(valid_days, indent=2)};"
 marker_start = "/* DATA_START */"
 marker_end = "/* DATA_END */"
 
@@ -567,8 +566,8 @@ for p in existing_consistency:
         day_str = title_prop[0].get("plain_text", "")
         consistency_map[day_str] = p.get("id")
 
-# Only sync the 15-day dashboard window, not all dates ever
-sync_dates = {d["date"] for d in last_15}
+# Sync the last 30-day window to consistency DB
+sync_dates = {d["date"] for d in valid_days[-30:]}
 for day_str, data in dashboard_data.items():
     if day_str not in sync_dates:
         continue
