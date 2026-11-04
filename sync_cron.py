@@ -64,7 +64,9 @@ if os.path.exists(_env_path):
 
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN", "")
 MASTER_TASKS_DB = "3d2a89dd-522b-8065-83c3-e3ae61376943"
+MASTER_TASKS_DS = "3d2a89dd-522b-8063-af24-000bc173e950"
 CONSISTENCY_DB = "3d3a89dd-522b-80e1-b7df-c35ba6f9e75e"
+CONSISTENCY_DS = "3d3a89dd-522b-808a-a092-000b4323c272"
 
 def normalize(t):
     if not t:
@@ -113,7 +115,7 @@ def notion_request(endpoint, method="POST", data=None, max_retries=4):
     url = f"https://api.notion.com/v1/{endpoint}"
     headers = {
         "Authorization": f"Bearer {NOTION_TOKEN}",
-        "Notion-Version": "2022-06-28",
+        "Notion-Version": "2025-09-03",
         "Content-Type": "application/json"
     }
     req_data = json.dumps(data).encode('utf-8') if data else None
@@ -150,7 +152,7 @@ def notion_request(endpoint, method="POST", data=None, max_retries=4):
     print(f"  [FAILED] {endpoint} after {max_retries} retries")
     return None
 
-def get_all_pages(db_id):
+def get_all_pages(source_id):
     pages = []
     has_more = True
     next_cursor = None
@@ -158,7 +160,9 @@ def get_all_pages(db_id):
         body = {}
         if next_cursor:
             body["start_cursor"] = next_cursor
-        res = notion_request(f"databases/{db_id}/query", method="POST", data=body)
+        res = notion_request(f"data_sources/{source_id}/query", method="POST", data=body)
+        if not res:
+            res = notion_request(f"databases/{source_id}/query", method="POST", data=body)
         if not res:
             break
         pages.extend(res.get("results", []))
@@ -171,7 +175,7 @@ today_dt = datetime.now()
 print(f"Running sync for {today}...")
 
 print("Fetching all tasks...")
-tasks = get_all_pages(MASTER_TASKS_DB)
+tasks = get_all_pages(MASTER_TASKS_DS)
 print(f"Fetched {len(tasks)} tasks total.")
 
 # ---------------------------------------------------------------
@@ -349,7 +353,7 @@ for norm_key, tmpl in recurring_templates.items():
 
         print(f"  Creating recurring ({repeat_val}): {title}")
         res = notion_request("pages", method="POST", data={
-            "parent": {"database_id": MASTER_TASKS_DB},
+            "parent": {"data_source_id": MASTER_TASKS_DS},
             "properties": new_props
         })
         if res:
@@ -364,7 +368,7 @@ for norm_key, tmpl in recurring_templates.items():
 print("\n--- PART 2: Delayed Task Rollover ---")
 
 # Refetch after recurring task creation
-tasks = get_all_pages(MASTER_TASKS_DB)
+tasks = get_all_pages(MASTER_TASKS_DS)
 
 # Rebuild today's active tasks and base names
 existing_today_titles = set()
@@ -465,7 +469,7 @@ for norm_base, instances in lineages.items():
     created_delayed.append(new_title)
     time.sleep(0.35)  # Rate-limit to stay under Notion's 3 req/s cap
     res = notion_request("pages", method="POST", data={
-        "parent": {"database_id": MASTER_TASKS_DB},
+        "parent": {"data_source_id": MASTER_TASKS_DS},
         "properties": new_props
     })
     if res:
@@ -477,7 +481,7 @@ for norm_base, instances in lineages.items():
 # ---------------------------------------------------------------
 print("\n--- PART 3: Dashboard Data ---")
 
-tasks = get_all_pages(MASTER_TASKS_DB)
+tasks = get_all_pages(MASTER_TASKS_DS)
 dashboard_data = {}
 
 for page in tasks:
@@ -511,6 +515,9 @@ sorted_days = sorted(dashboard_data.values(), key=lambda x: x["date"], reverse=T
 valid_days = [d for d in sorted_days if d["planned"] > 0 and d["date"] <= today]
 valid_days.reverse()
 print(f"  Built data for {len(valid_days)} days.")
+if not valid_days:
+    print("  [ABORT] No valid days found. Skipping HTML update and git push to prevent data loss.")
+    sys.exit(1)
 
 # ---------------------------------------------------------------
 # PART 4: INJECT DATA INTO HTML & PUSH TO GITHUB
@@ -557,7 +564,7 @@ else:
 # ---------------------------------------------------------------
 print("\n--- PART 5: Sync Consistency Database ---")
 
-existing_consistency = get_all_pages(CONSISTENCY_DB)
+existing_consistency = get_all_pages(CONSISTENCY_DS)
 consistency_map = {}
 for p in existing_consistency:
     props = p.get("properties", {})
@@ -586,7 +593,7 @@ for day_str, data in dashboard_data.items():
         notion_request(f"pages/{page_id}", method="PATCH", data={"properties": props})
     else:
         notion_request("pages", method="POST", data={
-            "parent": {"database_id": CONSISTENCY_DB},
+            "parent": {"data_source_id": CONSISTENCY_DS},
             "properties": props
         })
 
