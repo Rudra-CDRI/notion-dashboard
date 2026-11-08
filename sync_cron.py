@@ -186,7 +186,8 @@ by_date = defaultdict(list)
 for p in tasks:
     props = p.get('properties', {})
     date_prop = props.get('PLANNED DATE', {}).get('date')
-    d_str = date_prop.get('start') if date_prop else 'NO_DATE'
+    d_raw = date_prop.get('start') if date_prop else None
+    d_str = d_raw[:10] if d_raw else 'NO_DATE'
     title_prop = props.get('TASK', {}).get('title', [])
     raw_title = ''.join([t.get('plain_text', '') for t in title_prop]).strip() if title_prop else ''
     delay_count, base_name = extract_base_name(raw_title)
@@ -255,7 +256,8 @@ existing_today_base_names = set()
 for page in tasks:
     props = page.get('properties', {})
     date_prop = props.get('PLANNED DATE', {}).get('date')
-    if not date_prop or date_prop.get('start') != today:
+    d_start = date_prop.get('start', '')[:10] if date_prop else ''
+    if not date_prop or d_start != today:
         continue
     title_prop = props.get('TASK', {}).get('title', [])
     if title_prop:
@@ -277,7 +279,7 @@ for page in tasks:
         continue
     base_title = ''.join([t.get('plain_text', '') for t in title_prop]).strip()
     date_prop = props.get('PLANNED DATE', {}).get('date')
-    task_date = date_prop.get('start') if date_prop else None
+    task_date = (date_prop.get('start')[:10]) if (date_prop and date_prop.get('start')) else None
 
     norm_key = normalize(base_title)
     if norm_key not in recurring_templates or (task_date and task_date > recurring_templates[norm_key].get('date', '')):
@@ -376,7 +378,8 @@ existing_today_base_names = set()
 for page in tasks:
     props = page.get('properties', {})
     date_prop = props.get('PLANNED DATE', {}).get('date')
-    if not date_prop or date_prop.get('start') != today:
+    d_start = date_prop.get('start', '')[:10] if date_prop else ''
+    if not date_prop or d_start != today:
         continue
     title_prop = props.get('TASK', {}).get('title', [])
     if title_prop:
@@ -391,7 +394,7 @@ for page in tasks:
     date_prop = props.get('PLANNED DATE', {}).get('date')
     if not date_prop or not date_prop.get('start'):
         continue
-    date_str = date_prop.get('start')
+    date_str = date_prop.get('start')[:10]
     status = props.get('STATUS', {}).get('checkbox', False)
     title_prop = props.get('TASK', {}).get('title', [])
     if not title_prop:
@@ -489,7 +492,7 @@ for page in tasks:
     date_prop = props.get('PLANNED DATE', {}).get('date')
     if not date_prop or not date_prop.get('start'):
         continue
-    date_str = date_prop.get('start')
+    date_str = date_prop.get('start')[:10]
     status = props.get('STATUS', {}).get('checkbox', False)
     title_prop = props.get('TASK', {}).get('title', [])
     title_str = ''.join([t.get('plain_text', '') for t in title_prop]) if title_prop else "Untitled"
@@ -570,7 +573,12 @@ for p in existing_consistency:
     props = p.get("properties", {})
     title_prop = props.get("Day", {}).get("title", [])
     if title_prop:
-        day_str = title_prop[0].get("plain_text", "")
+        day_str = title_prop[0].get("plain_text", "").strip()
+        if "T" in day_str or len(day_str) > 10:
+            print(f"  Archiving legacy timestamped consistency page: {day_str}")
+            notion_request(f"pages/{p.get('id')}", method="PATCH", data={"archived": True})
+            time.sleep(0.2)
+            continue
         consistency_map[day_str] = p.get("id")
 
 # Sync the last 30-day window to consistency DB
