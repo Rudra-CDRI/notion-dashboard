@@ -530,6 +530,9 @@ print("\n--- PART 4: GitHub Push ---")
 repo_dir = r"C:\Users\rudra\Desktop\RUDRA\Agents\Internship-cold mail\notion-dashboard"
 html_path = os.path.join(repo_dir, "index.html")
 
+# Ensure local working copy is up-to-date with remote
+subprocess.run("git pull origin main", cwd=repo_dir, shell=True, capture_output=True)
+
 with open(html_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
@@ -556,11 +559,12 @@ result = subprocess.run('git commit -m "Automated data sync & rollover"', cwd=re
 if "nothing to commit" in (result.stdout + result.stderr):
     print("  No changes to push.")
 else:
-    push = subprocess.run("git pull origin main --rebase && git push", cwd=repo_dir, shell=True, capture_output=True, text=True)
+    push = subprocess.run("git pull origin main --rebase -X theirs && git push", cwd=repo_dir, shell=True, capture_output=True, text=True)
     if push.returncode == 0:
         print("  Pushed to GitHub successfully!")
     else:
-        print("  Push failed:", push.stderr)
+        print("  Push failed:", push.stderr or push.stdout)
+        subprocess.run("git rebase --abort", cwd=repo_dir, shell=True, capture_output=True)
 
 # ---------------------------------------------------------------
 # PART 5: SYNC CONSISTENCY DATABASE
